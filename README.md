@@ -63,7 +63,7 @@ Same subject, same rough length. Both numbers are asserted in the test suite of 
 ## Same engine, other surfaces
 
 - **[parweb/mcp-ai-slop-checker](https://github.com/parweb/mcp-ai-slop-checker)** — this scorer as an MCP server, so a model can check its own drafts. Listed in the official [MCP Registry](https://registry.modelcontextprotocol.io); `claude mcp add ai-slop-checker -- npx -y github:parweb/mcp-ai-slop-checker`.
-- **[parweb/landing-copy-grader](https://github.com/parweb/landing-copy-grader)** — the same approach aimed at landing-page hero copy, plus an open dataset of **239 real landing pages** scored with it. Its headline finding: **195 of the 239 (82%) contain no number anywhere in their hero.** The dataset ships the extracted text of every page and a `verify-dataset.js` that re-scores all 239 rows offline.
+- **[parweb/landing-copy-grader](https://github.com/parweb/landing-copy-grader)** — the same approach aimed at landing-page hero copy, plus an open dataset of **239 real landing pages** scored with it under the rule set of 2026-07-24 (`static-fetch-regex-v1`; the grader has since been tightened, and the dataset records which rule scored it). Its headline finding: **195 of the 239 (82%) contain no number anywhere in their hero.** The dataset ships the extracted text of every page and a `verify-dataset.js` that re-scores all 239 rows offline.
 
 ## Project status
 
