@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Does my text sound like AI? — free ChatGPT-style checker (em-dashes, "delve" & 60+ tells)</title>
+<meta name="description" content="Paste any text — email, essay, LinkedIn post, cover letter — and get a 0–100 score for how many AI-writing tells it carries: em-dash density, delve/tapestry words, formulaic structures, uniform sentences. Deterministic, free, no signup, runs in your browser. Not an AI detector — a style-tells counter.">
+<meta property="og:title" content="Does my text sound like AI? — free style-tells checker">
+<meta property="og:description" content="Paste any text. Counts the tells — em-dashes, delve-words, formulaic triads, uniform sentences — and scores 0–100. Deterministic, in-browser, free. Not a detector: a tells counter.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://1h-money-store.vercel.app/sounds-ai">
+<meta property="og:image" content="https://1h-money-store.vercel.app/og-sounds.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Does my text sound like AI? — free style-tells checker">
+<meta name="twitter:description" content="Paste any text. Counts the tells — em-dashes, delve-words, formulaic triads, uniform sentences — and scores 0–100. Free, in-browser.">
+<meta name="twitter:image" content="https://1h-money-store.vercel.app/og-sounds.png">
+<link rel="canonical" href="https://1h-money-store.vercel.app/sounds-ai">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Does My Text Sound AI? — Style Tells Checker",
+  "url": "https://1h-money-store.vercel.app/sounds-ai",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (web browser)",
+  "description": "Free deterministic checker that counts writing patterns statistically over-represented in LLM output (em-dash density, 'delve'-class vocabulary, formulaic structures, uniform sentence rhythm) and scores any text 0–100. It is NOT a reliable AI detector — nothing is; it counts style tells only. No LLM, runs 100% in the browser, no signup, nothing stored.",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
+  "isAccessibleForFree": true,
+  "publisher": {"@type": "Organization", "name": "1h Money Store", "url": "https://1h-money-store.vercel.app/"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0b08;--ink:#f4efe6;--muted:#9a917f;--line:#2a271f;--accent:#e8622c;--accent2:#d9b44a;--good:#7fb069;--paper:#141109;--serif:"Fraunces",Georgia,serif;--mono:"Space Mono",monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);font-weight:300;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.2em;font-size:.68rem}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+header{padding:70px 0 26px;position:relative}
+header .glow{position:absolute;top:-10%;right:-25%;width:60vw;height:55vw;border-radius:50%;background:radial-gradient(circle,rgba(232,98,44,.18),transparent 60%);filter:blur(55px);pointer-events:none}
+.home{color:var(--muted);text-decoration:none;font-family:var(--mono);text-transform:uppercase;letter-spacing:.15em;font-size:.66rem}
+.home:hover{color:var(--accent2)}
+h1{font-size:clamp(2.1rem,6vw,3.4rem);line-height:1.02;font-weight:500;letter-spacing:-.02em;margin:24px 0 0}
+h1 em{font-style:italic;color:var(--accent2)}
+.lede{color:var(--muted);font-size:1.08rem;max-width:54ch;margin-top:18px}
+.disclaim{margin-top:16px;border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:8px;padding:12px 16px;color:var(--muted);font-size:.88rem;max-width:60ch}
+.disclaim b{color:var(--accent2);font-weight:400}
+.form{margin-top:30px;border:1px solid var(--line);border-radius:14px;padding:28px 26px;background:linear-gradient(160deg,var(--paper),var(--bg))}
+label{display:block;font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;font-size:.62rem;color:var(--accent);margin:0 0 8px}
+input,textarea{width:100%;background:#0a0906;border:1px solid var(--line);border-radius:8px;color:var(--ink);font-family:var(--serif);font-size:1.02rem;padding:13px 15px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+.grade{width:100%;margin-top:16px;background:var(--accent);color:var(--bg);border:none;cursor:pointer;padding:16px;border-radius:100px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;font-size:.74rem;font-weight:700;transition:transform .3s,background .3s}
+.grade:hover{transform:translateY(-2px);background:var(--accent2)}
+.hint{color:var(--muted);font-size:.86rem;margin-top:10px}
+.hint b{color:var(--accent2);font-weight:400}
+#result{margin-top:34px;display:none}
+.scorecard{border:1px solid var(--line);border-radius:14px;padding:34px 28px;text-align:center;background:linear-gradient(160deg,var(--paper),var(--bg))}
+.big{font-size:clamp(4rem,16vw,7rem);font-weight:500;letter-spacing:-.03em;line-height:1}
+.big small{font-size:1.6rem;color:var(--muted)}
+.verdict{font-style:italic;font-size:1.5rem;margin-top:6px}
+.scale{color:var(--muted);font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;margin-top:10px}
+.bars{margin:28px 0 8px;text-align:left;display:flex;flex-direction:column;gap:14px}
+.bar .top{display:flex;justify-content:space-between;font-size:.92rem;margin-bottom:6px}
+.bar .top b{font-weight:500}
+.bar .top span{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.track{height:7px;background:#0a0906;border:1px solid var(--line);border-radius:100px;overflow:hidden}
+.fill{height:100%;border-radius:100px;background:var(--accent2);transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.fixes{text-align:left;margin-top:28px;border-top:1px solid var(--line);padding-top:24px}
+.fixes h3{font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em;font-size:.66rem;color:var(--accent);margin-bottom:16px}
+.fixes li{list-style:none;color:var(--ink);padding:10px 0 10px 26px;position:relative;border-bottom:1px solid var(--line);font-size:1rem}
+.fixes li:last-child{border-bottom:none}
+.fixes li::before{content:"→";position:absolute;left:0;color:var(--accent2)}
+.fixes li b{color:var(--accent2);font-weight:400;font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em}
+.share{margin-top:18px;background:none;border:1px solid var(--ink);color:var(--ink);cursor:pointer;padding:10px 20px;border-radius:100px;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;transition:background .3s,color .3s}
+.share:hover{background:var(--ink);color:var(--bg)}
+.share.done{background:var(--accent2);border-color:var(--accent2);color:var(--bg)}
+.sharerow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+a.share{display:inline-block;text-decoration:none}
+.receipt{margin:18px auto 0;max-width:100%;text-align:left;font-family:var(--mono);font-size:.72rem;line-height:1.7;color:var(--muted);background:#0a0906;border:1px solid var(--line);border-radius:8px;padding:14px 16px;white-space:pre-wrap;word-break:break-all}
+.finenote{color:var(--muted);font-size:.82rem;margin-top:16px}
+.cross{margin:26px 0 40px;border:1px solid var(--accent2);border-radius:14px;padding:30px 26px;background:linear-gradient(160deg,var(--paper),var(--bg))}
+.cross h3{font-size:1.5rem;font-weight:500}
+.cross h3 em{font-style:italic;color:var(--accent2)}
+.cross p{color:var(--muted);margin-top:10px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;border:none;cursor:pointer;padding:13px 22px;border-radius:100px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;font-size:.7rem;font-weight:700;transition:transform .3s,background .3s}
+.btn.p{background:var(--accent);color:var(--bg)}
+.btn.p:hover{transform:translateY(-2px);background:var(--accent2)}
+.btn.o{background:none;border:1px solid var(--ink);color:var(--ink)}
+.btn.o:hover{background:var(--ink);color:var(--bg)}
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media(max-width:560px){h1{font-size:1.9rem}}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="glow"></div>
+  <a class="home" href="/tools">← Free tools</a>
+  <h1>Does your text <em>sound like AI?</em></h1>
+  <p class="lede">Paste anything — an email, essay, LinkedIn post, cover letter. Get a 0–100 score for how many AI-writing tells it carries: em-dash density, "delve"-class words, formulaic structures, uniform sentence rhythm. Runs in your browser, no signup, nothing stored.</p>
+  <p class="disclaim"><b>Honest framing:</b> this counts writing patterns statistically over-represented in LLM output. It is <b>NOT a reliable AI detector</b> — nothing is. A human can trip every tell; an AI can avoid them all. Score = style tells, not authorship.</p>
+
+  <div class="form">
+    <div class="field">
+      <label for="txt">Paste any text</label>
+      <textarea id="txt" rows="9" placeholder="Paste your email, essay, post or cover letter here… (at least 200 characters to score)"></textarea>
+    </div>
+    <button class="grade" id="go">● Check my text</button>
+    <p class="hint" id="formhint">Needs <b>~200+ characters</b> to score reliably. 100% client-side · deterministic · your text never leaves the page.</p>
+  </div>
+
+  <div id="result">
+    <div class="scorecard">
+      <div class="mono" style="color:var(--accent)">Your score</div>
+      <div class="big"><span id="score">0</span><small>/100</small></div>
+      <div class="verdict" id="verdict"></div>
+      <div class="scale">100 = reads human · 0 = every tell tripped</div>
+      <div class="bars" id="bars"></div>
+      <button class="share" id="share">Copy my result</button>
+      <div class="sharerow">
+        <button class="share" id="plink">Copy permalink</button>
+        <a class="share" id="xshare" href="#" target="_blank" rel="noopener">Post on X →</a>
+      </div>
+      <pre class="receipt" id="receipt"></pre>
+      <button class="share" id="rcopy">Copy for Reddit / HN</button>
+      <p class="finenote">Reminder: tells ≠ proof. This is a style counter, not a detector.</p>
+    </div>
+
+    <div class="fixes">
+      <h3>What to tighten</h3>
+      <ul id="fixes"></ul>
+    </div>
+
+    <div class="cross">
+      <h3 id="crossTitle">More free checks</h3>
+      <p id="crossBody">Same deterministic engine, pointed at specific formats:</p>
+      <div class="cta-row">
+        <a class="btn o" href="/grader">Landing page grader →</a>
+        <a class="btn o" href="/tools/subject-line-scorer">Subject line scorer →</a>
+        <button class="btn p" data-sku="leverage">● LEVERAGE — 42 prompts, €19</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="wrap"><div style="border:1px solid var(--line);border-radius:12px;padding:28px 26px;text-align:center;background:linear-gradient(160deg,var(--paper),var(--bg));margin-bottom:40px">
+  <div class="mono" style="color:var(--accent)">Stay in the loop</div>
+  <p style="color:var(--muted);margin:10px auto 18px;max-width:44ch">New free tools + writing tips for solo founders. No spam, unsubscribe anytime.</p>
+  <form id="subform" style="display:flex;gap:10px;max-width:430px;margin:0 auto;flex-wrap:wrap;justify-content:center">
+    <input type="email" name="email" required placeholder="you@email.com" style="flex:1;min-width:200px;background:#0a0906;border:1px solid var(--line);border-radius:100px;color:var(--ink);padding:12px 18px;font-family:var(--serif);font-size:1rem">
+    <button type="submit" style="background:var(--accent);color:var(--bg);border:none;cursor:pointer;padding:12px 24px;border-radius:100px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em;font-size:.68rem;font-weight:700">Subscribe</button>
+  </form>
+  <p id="submsg" style="color:var(--accent2);margin-top:12px;font-size:.9rem;min-height:1.1em"></p>
+</div></section>
+<script>
+(function(){var f=document.getElementById('subform');if(!f)return;f.addEventListener('submit',async function(e){e.preventDefault();var m=document.getElementById('submsg');m.textContent='…';try{var r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:'ac1e9a71-92f4-4727-b13e-5d4c83b7c0e7',email:f.email.value,subject:'New subscriber - 1h Money Store (sounds-ai)',from_name:'1h Money Store'})});var d=await r.json();if(d.success){m.textContent="Thanks - you're in.";f.reset();if(window.va)window.va('event',{name:'email_capture'});}else{m.textContent='Try again in a moment.';}}catch(err){m.textContent='Network error - try again.';}});})();
+</script>
+
+<footer class="wrap">
+  <span class="mono">© 2026 1h Money Store</span>
+  <a class="home" href="/tools">All free tools →</a>
+</footer>
+
+<script>
+// ---- Attribution + events (shared with store) ----
+var ATTR=(function(){try{var s=JSON.parse(sessionStorage.getItem('attr')||'null');if(s)return s;var q=new URLSearchParams(location.search);var a={utm_source:q.get('utm_source')||'',utm_medium:q.get('utm_medium')||'',utm_campaign:q.get('utm_campaign')||'',ref:q.get('ref')||'',referrer:document.referrer||'',landing:location.pathname};sessionStorage.setItem('attr',JSON.stringify(a));return a;}catch(e){return{};}})();
+function track(n){try{if(window.va)window.va('event',{name:n,source:ATTR.utm_source||'direct'});}catch(e){}}
+
+// ---- Deterministic AI-style-tells scoring (no LLM, no network). 100 = reads human. ----
+// SOUNDSAI-GRADE-START
+var LLM_PHRASES=["it's important to note","it is important to note","it's worth noting","it is worth noting","in today's fast-paced world","in today's digital age","in today's world","navigate the complexities","navigating the complexities","in the realm of","in the world of","a testament to","plays a crucial role","plays a pivotal role","plays a vital role","at the end of the day","dive into","diving into","delve into","delving into","embark on a journey","embark on this journey","ever-evolving landscape","ever-changing landscape","unlock the potential","unlock the power","unleash the power","unleash the potential","take it to the next level","look no further","when it comes to","game-changer","game changer","in summary","to summarize","first and foremost","it goes without saying","needless to say","the possibilities are endless","best practices","actionable insights","valuable insights","key takeaways","in an era where","in an age where","stands as a","serves as a"];
+var LLM_WORDS=['delve','delves','delving','tapestry','testament','moreover','furthermore','additionally','consequently','leverage','leveraging','leverages','seamless','seamlessly','robust','crucial','pivotal','foster','fostering','fosters','harness','harnessing','harnesses','elevate','elevates','empower','empowers','empowering','streamline','streamlining','holistic','multifaceted','myriad','plethora','realm','underscore','underscores','underscoring','showcase','showcases','showcasing','boast','boasts','boasting','vibrant','bustling','comprehensive','invaluable','paramount','meticulous','meticulously','intricate','intricacies','nuanced','profound','embark','embarking','transformative','innovative','cutting-edge','game-changing','synergy','paradigm','beacon','commendable','noteworthy','unwavering','unparalleled','captivate','captivating','resonate','resonates','endeavor','endeavors','facilitate','facilitates','utilize','utilizing','optimal','pertinent'];
+function saiWords(t){return (t.trim().match(/[A-Za-z0-9''-]+/g)||[]);}
+function saiEsc(w){return w.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&');}
+function saiCountList(t,list){var l=' '+t.toLowerCase().replace(/['']/g,"'")+' ';var n=0;list.forEach(function(w){var re=new RegExp('(^|[^a-z])'+saiEsc(w)+'([^a-z]|$)','g');var m=l.match(re);if(m)n+=m.length;});return n;}
+function saiSentences(t){return t.replace(/\n+/g,'. ').split(/[.!?]+["')\]]?\s+|[.!?]+$/).map(function(s){return saiWords(s).length;}).filter(function(n){return n>=2;});}
+function saiCV(arr){if(arr.length<2)return 0;var m=arr.reduce(function(a,b){return a+b;},0)/arr.length;if(!m)return 0;var v=arr.reduce(function(a,b){return a+(b-m)*(b-m);},0)/arr.length;return Math.sqrt(v)/m;}
+function saiClamp(x,lo,hi){return Math.max(lo,Math.min(hi,Math.round(x)));}
+
+function grade(text){
+  var W=saiWords(text).length||1;
+  var dims=[],fixes=[],flags=[];
+
+  // 1. LLM-word density (30) — delve/tapestry/furthermore class
+  var pHits=saiCountList(text,LLM_PHRASES), wHits=saiCountList(text,LLM_WORDS);
+  var weighted=pHits*2+wHits, per100L=weighted*100/W;
+  var s1=saiClamp(30-per100L*9,0,30);
+  dims.push({key:'LLM-word density',max:30,score:s1,notes:{phrases:pHits,words:wHits}});
+  if(weighted>0){flags.push('llmwords');fixes.push({t:'Cut the LLM words',d:'Found '+(pHits+wHits)+' ("delve/tapestry/furthermore/it’s important to note"…). Each one is a 2026 meme-tell. Replace with the plain word you’d say out loud.'});}
+
+  // 2. Em-dash density (20) — THE 2026 meme tell
+  var dashes=(text.match(/—|–|(^|[^-])--([^-]|$)/g)||[]).length;
+  var per100D=dashes*100/W, allow=Math.floor(W/400);
+  var effD=Math.max(0,dashes-allow);
+  var s2=saiClamp(20-effD*4-per100D*6,0,20);
+  dims.push({key:'Em-dash density',max:20,score:s2,notes:{dashes:dashes}});
+  if(effD>0){flags.push('emdash');fixes.push({t:'Thin out the em-dashes',d:dashes+' em-dash'+(dashes>1?'es':'')+' in '+W+' words. The em-dash is 2026’s #1 "written by ChatGPT" meme. Keep one if you love it — swap the rest for periods or commas.'});}
+
+  // 3. Formulaic structures (15)
+  var f1=(text.match(/not only\b[^.!?\n]{1,80}\bbut(\s+also)?\b/gi)||[]).length;
+  var f2=(text.match(/whether you'?re\b[^.!?\n]{1,60}\bor\b/gi)||[]).length;
+  var f3=(text.match(/\bin conclusion\b/gi)||[]).length;
+  var f4=(text.match(/it'?s not (just|only|about)\b[^.!?\n]{1,60}[,;—–-]\s*it'?s\b/gi)||[]).length;
+  var triads=(text.match(/\b[\w''-]+, [\w''-]+,? and [\w''-]+\b/g)||[]).length;
+  var fHits=f1+f2+f3+f4, triPen=Math.max(0,triads-1);
+  var s3=saiClamp(15-fHits*5-triPen*4,0,15);
+  dims.push({key:'Formulaic structures',max:15,score:s3,notes:{hits:fHits,triads:triads}});
+  if(fHits>0||triPen>0){flags.push('formulaic');fixes.push({t:'Break the templates',d:(fHits>0?'"Not only… but also / whether you’re… or / in conclusion" ×'+fHits+'. ':'')+(triPen>0?triads+' rule-of-three lists ("X, Y, and Z"). ':'')+'These scaffolds read machine-assembled. Say one thing plainly instead.'});}
+
+  // 4. Sentence rhythm (15) — low length variance = tell
+  var sl=saiSentences(text);
+  var cv=saiCV(sl);
+  var s4=sl.length<4?12:saiClamp(cv*30,0,15);
+  dims.push({key:'Sentence rhythm',max:15,score:s4,notes:{sentences:sl.length,cv:Math.round(cv*100)/100}});
+  if(sl.length>=4&&s4<8){flags.push('uniform');fixes.push({t:'Vary sentence length',d:'Your sentences are suspiciously even ('+sl.length+' sentences, low variance). Humans write long, then short. Like this.'});}
+
+  // 5. Specificity (10) — numbers + proper nouns
+  var hasNum=/\d/.test(text);
+  var propers=(text.match(/(?:[a-z,;''"’]\s+|\s[—–(]\s?)([A-Z][a-z]{2,})/g)||[]).length;
+  var s5=(hasNum?5:0)+(propers>0?5:0);
+  dims.push({key:'Specificity',max:10,score:s5,notes:{number:hasNum,propers:propers}});
+  if(s5<10){flags.push('nospec');fixes.push({t:'Add something checkable',d:(hasNum?'':'No number anywhere. ')+(propers>0?'':'No names, places or products mid-sentence. ')+'LLM filler floats free of facts — one date, figure or proper noun grounds the whole text.'});}
+
+  // 6. List perfection (10) — parallel bullets, **Bold:** headers
+  var lines=text.split('\n');
+  var bullets=lines.filter(function(l){return /^\s*([-*•–]|\d+[.)])\s+/.test(l);});
+  var boldColon=(text.match(/\*\*[^*\n]{2,60}\*\*:?/g)||[]).length;
+  var bCV=saiCV(bullets.map(function(l){return saiWords(l).length;}));
+  var pen6=Math.min(10,boldColon*3+(bullets.length>=3?(bCV<0.35?6:2):0));
+  var s6=10-pen6;
+  dims.push({key:'List perfection',max:10,score:s6,notes:{bullets:bullets.length,bold:boldColon}});
+  if(pen6>2){flags.push('lists');fixes.push({t:'Rough up the bullets',d:(boldColon>0?boldColon+' "**Bold:** explanation" items — the classic ChatGPT list format. ':'')+(bullets.length>=3&&bCV<0.35?'All '+bullets.length+' bullets are near-identical length. ':'')+'Merge some into prose, let one run long.'});}
+
+  var total=dims.reduce(function(a,d){return a+d.score;},0);
+  total=Math.max(0,Math.min(100,Math.round(total)));
+  var verdict= total>=80?'Reads human.' : total>=60?'Mostly human — a few tells.' : total>=40?'Noticeably AI-flavored.' : 'This sounds AI-generated.';
+  if(fixes.length===0)fixes.push({t:'Clean',d:'No obvious tells tripped. Remember: that proves style, not authorship — this is a tells counter, not a detector.'});
+  return {total:total,verdict:verdict,dims:dims,fixes:fixes.slice(0,6),flags:flags,words:W};
+}
+// SOUNDSAI-GRADE-END
+
+var R=null,PLINK='',RECEIPT='';
+function run(){
+  var text=document.getElementById('txt').value;
+  var hint=document.getElementById('formhint');
+  if(text.trim().length<200){
+    hint.innerHTML='Need <b>at least 200 characters</b> — you have '+text.trim().length+'. Paste the full text for a reliable read.';
+    document.getElementById('txt').focus();return;
+  }
+  hint.innerHTML='Needs <b>~200+ characters</b> to score reliably. 100% client-side · deterministic · your text never leaves the page.';
+  R=grade(text);
+  document.getElementById('result').style.display='block';
+  document.getElementById('verdict').textContent=R.verdict;
+  var col=R.total>=80?'var(--good)':R.total>=50?'var(--accent2)':'var(--accent)';
+  document.getElementById('score').textContent='0';
+  var el=document.getElementById('score'), tgt=R.total, st=performance.now();
+  (function anim(t){var p=Math.min(1,(t-st)/700);el.textContent=Math.round(tgt*p);el.style.color=col;if(p<1)requestAnimationFrame(anim);})(st);
+  var bars=R.dims.map(function(d){return '<div class="bar"><div class="top"><b>'+d.key+'</b><span>'+d.score+'/'+d.max+'</span></div><div class="track"><div class="fill" style="width:0"></div></div></div>';}).join('');
+  document.getElementById('bars').innerHTML=bars;
+  setTimeout(function(){document.querySelectorAll('#bars .fill').forEach(function(f,i){f.style.width=Math.round(R.dims[i].score/R.dims[i].max*100)+'%';});},60);
+  document.getElementById('fixes').innerHTML=R.fixes.map(function(f){return '<li><b>'+f.t+'</b> — '+f.d+'</li>';}).join('');
+  var human=R.total>=70;
+  document.getElementById('crossTitle').innerHTML = human? 'Reads human. <em>Keep it that way.</em>' : 'Want writing that <em>doesn’t trip the tells?</em>';
+  document.getElementById('crossBody').textContent = human
+    ? 'Nice — your voice survives. Check your landing copy and subject lines with the same engine, or grab the prompts that force this voice out of ChatGPT/Claude.'
+    : 'The fixes above are exactly what LEVERAGE’s 42 prompts force out of ChatGPT or Claude. Or point the same engine at your landing page and subject lines.';
+  PLINK='https://1h-money-store.vercel.app/grader/s?score='+R.total+(R.flags.length?'&f='+R.flags.join(','):'')+'&d=sounds-ai';
+  var xtxt= human
+    ? 'My writing scored '+R.total+'/100 human on a deterministic "does this sound AI?" tells-checker (em-dashes, delve-words, formulaic triads). No LLM, runs in the browser.'
+    : 'Ran my text through a deterministic AI-style-tells checker (em-dashes, delve-words, uniform sentences) — scored '+R.total+'/100. It flags exactly what to tighten.';
+  document.getElementById('xshare').href='https://twitter.com/intent/tweet?text='+encodeURIComponent(xtxt)+'&url='+encodeURIComponent(PLINK);
+  var FL={llmwords:'LLM words',emdash:'em-dash density',formulaic:'formulaic structures',uniform:'uniform sentences',nospec:'no specifics',lists:'perfect bullet lists'};
+  var top2=R.flags.slice(0,2).map(function(f){return FL[f];}).join(', ')||'nothing — no tells tripped';
+  RECEIPT='ai-sounding tells check — '+R.total+'/100 (100 = reads human)\nflagged: '+top2+'\ncounts style tells only — NOT an ai detector (nothing is)\ndeterministic, no LLM, 100% client-side\nreplay: '+PLINK;
+  document.getElementById('receipt').textContent=RECEIPT;
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  track('soundsai_run_'+(R.total>=70?'high':'low'));
+}
+document.getElementById('go').addEventListener('click',run);
+document.getElementById('share').addEventListener('click',function(){
+  if(!R)return; var b=this;
+  var url='https://1h-money-store.vercel.app/sounds-ai?utm_source=soundsai-share&utm_medium=viral&utm_campaign=result';
+  var txt=R.total>=70
+    ? 'My writing scored '+R.total+'/100 for reading human on a free "does this sound AI?" checker — counts em-dashes, delve-words and formulaic tells. Deterministic, no LLM, in-browser. Check yours: '+url
+    : 'I ran my text through a deterministic "does this sound AI?" tells-checker — no LLM, 100% in-browser. Scored '+R.total+'/100 and it flagged exactly what to tighten. Check yours: '+url;
+  navigator.clipboard.writeText(txt).then(function(){b.textContent='Copied ✓';b.classList.add('done');track('soundsai_share');setTimeout(function(){b.textContent='Copy my result';b.classList.remove('done');},1800);});
+});
+document.getElementById('plink').addEventListener('click',function(){
+  if(!PLINK)return; var b=this;
+  navigator.clipboard.writeText(PLINK).then(function(){b.textContent='Copied ✓';b.classList.add('done');track('soundsai_permalink');setTimeout(function(){b.textContent='Copy permalink';b.classList.remove('done');},1800);});
+});
+document.getElementById('xshare').addEventListener('click',function(){track('soundsai_share_x');});
+document.getElementById('rcopy').addEventListener('click',function(){
+  if(!RECEIPT)return; var b=this;
+  navigator.clipboard.writeText(RECEIPT).then(function(){b.textContent='Copied ✓';b.classList.add('done');track('soundsai_receipt');setTimeout(function(){b.textContent='Copy for Reddit / HN';b.classList.remove('done');},1800);});
+});
+document.querySelectorAll('.btn.p[data-sku]').forEach(function(btn){
+  btn.addEventListener('click',async function(){
+    track('soundsai_buy_'+btn.dataset.sku);
+    btn.disabled=true;var t=btn.textContent;btn.textContent='Redirecting…';
+    try{var r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sku:btn.dataset.sku,attribution:ATTR})});var d=await r.json();if(d.url){location=d.url;}else{alert('Error');btn.disabled=false;btn.textContent=t;}}catch(e){alert('Network error');btn.disabled=false;btn.textContent=t;}
+  });
+});
+</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
