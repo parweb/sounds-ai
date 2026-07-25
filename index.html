@@ -100,7 +100,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);displa
 <body>
 <header class="wrap">
   <div class="glow"></div>
-  <a class="home" href="/tools">← Free tools</a>
+  <a class="home" href="https://1h-money-store.vercel.app/tools?utm_source=github-pages&amp;utm_medium=sounds-ai">← Free tools</a>
   <h1>Does your text <em>sound like AI?</em></h1>
   <p class="lede">Paste anything — an email, essay, LinkedIn post, cover letter. Get a 0–100 score for how many AI-writing tells it carries: em-dash density, "delve"-class words, formulaic structures, uniform sentence rhythm. Runs in your browser, no signup, nothing stored.</p>
   <p class="disclaim"><b>Honest framing:</b> this counts writing patterns statistically over-represented in LLM output. It is <b>NOT a reliable AI detector</b> — nothing is. A human can trip every tell; an AI can avoid them all. Score = style tells, not authorship.</p>
@@ -140,9 +140,9 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);displa
       <h3 id="crossTitle">More free checks</h3>
       <p id="crossBody">Same deterministic engine, pointed at specific formats:</p>
       <div class="cta-row">
-        <a class="btn o" href="/grader">Landing page grader →</a>
-        <a class="btn o" href="/tools/subject-line-scorer">Subject line scorer →</a>
-        <button class="btn p" data-sku="leverage">● LEVERAGE — 42 prompts, €19</button>
+        <a class="btn o" href="https://parweb.github.io/landing-copy-grader/">Landing page grader →</a>
+        <a class="btn o" href="https://1h-money-store.vercel.app/tools/subject-line-scorer?utm_source=github-pages&amp;utm_medium=sounds-ai">Subject line scorer →</a>
+        <a class="btn p" href="https://1h-money-store.vercel.app/?utm_source=github-pages&amp;utm_medium=sounds-ai">● LEVERAGE — 42 prompts, €19</a>
       </div>
     </div>
   </div>
@@ -163,7 +163,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);displa
 
 <footer class="wrap">
   <span class="mono">© 2026 1h Money Store</span>
-  <a class="home" href="/tools">All free tools →</a>
+  <a class="home" href="https://1h-money-store.vercel.app/tools?utm_source=github-pages&amp;utm_medium=sounds-ai">All free tools →</a>
 </footer>
 
 <script>
@@ -299,14 +299,7 @@ document.getElementById('rcopy').addEventListener('click',function(){
   if(!RECEIPT)return; var b=this;
   navigator.clipboard.writeText(RECEIPT).then(function(){b.textContent='Copied ✓';b.classList.add('done');track('soundsai_receipt');setTimeout(function(){b.textContent='Copy for Reddit / HN';b.classList.remove('done');},1800);});
 });
-document.querySelectorAll('.btn.p[data-sku]').forEach(function(btn){
-  btn.addEventListener('click',async function(){
-    track('soundsai_buy_'+btn.dataset.sku);
-    btn.disabled=true;var t=btn.textContent;btn.textContent='Redirecting…';
-    try{var r=await fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sku:btn.dataset.sku,attribution:ATTR})});var d=await r.json();if(d.url){location=d.url;}else{alert('Error');btn.disabled=false;btn.textContent=t;}}catch(e){alert('Network error');btn.disabled=false;btn.textContent=t;}
-  });
-});
 </script>
-<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
 </body>
 </html>
